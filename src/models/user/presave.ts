@@ -5,12 +5,15 @@ import { User } from '../../types';
 import { userSchema } from '../../models';
 
 import { Schema } from 'mongoose';
-import { isValidEmail, isValidPassword } from './utils';
+import { isValidEmail, isValidName, isValidPassword } from './utils';
 dotenv.config();
 
 async function preSave  (this: User, next: ()=>void){
     const saltRounds: number = parseInt(process.env.BCRYPT_SALT_ROUNDS||"12");
     const user: User = this;
+    if(!isValidName(this.name)){
+        throw Error("Invalid name");
+    }
     if(!isValidPassword(this.password)){
         throw Error("Invalid password");
     }
