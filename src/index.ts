@@ -7,7 +7,7 @@ import router from './routes';
 dotenv.config();
 const app: Express = express(); 
 app.use(express.json())
-app.use(authenticateJWT);
+// app.use(authenticateJWT);
 
 app.use(router);
 

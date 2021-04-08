@@ -14,7 +14,7 @@ const createUser = async(req:any, res:any): Promise<void> => {
     // console.log("Here")
     try{
         const body = req.body as UserInput;
-        let userCreated: User = await makeUser(body);
+        let userCreated: Exclude<User, "password"> = await makeUser(body);
 
         res.status(200)
         .json({user: userCreated});

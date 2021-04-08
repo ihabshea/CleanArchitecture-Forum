@@ -7,5 +7,5 @@ export default interface User extends Document{
     email: string;
     createdAt: Date;
     lastLogin: Date;
-
-}
+    comparePasswords: (encrypted_password: string, bcrypt: any, password: string) => boolean;
+}   
