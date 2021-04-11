@@ -6,6 +6,8 @@ import LoginDetails from './loginDetails';
 import Device from './Device';
 
 import Token from './Token';
+import PaginationParams from './PaginationParams';
+
 import JWTType from './JWT';
 import Permission from './Permission';
 
@@ -20,6 +22,7 @@ export {
     Comment,
     UserInput,
     JWTType,
+    PaginationParams,
     Token,
     User,
     Rating,

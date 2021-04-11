@@ -1,4 +1,4 @@
-import {Document} from 'mongoose';
+import {Document, ObjectId} from 'mongoose';
 import { User,Comment, Rating } from '.'; 
 import Device from './Device';
 export default interface Post extends Document{
@@ -6,7 +6,7 @@ export default interface Post extends Document{
     title: string;
     content: string;
     hash: string;
-    user: User;
+    user: User | ObjectId;
     createdAt: Date;
     updatedAt: Date;
     device: Device;

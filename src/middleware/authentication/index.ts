@@ -1,3 +1,4 @@
 import checkIfRevoked from './checkIfRevoked'
 import updateLastActivity from './updateLastActivity';
-export {checkIfRevoked, updateLastActivity};
+import getUserDevice from './getUserDevice'
+export {checkIfRevoked, getUserDevice, updateLastActivity};

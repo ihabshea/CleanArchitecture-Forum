@@ -1,5 +1,6 @@
 import {Post} from '../../types';
 import {model, Schema} from 'mongoose';
+import preSave from './preSave';
 // import preSave from './presave';
 // import { comparePasswords } from './methods';
 const postSchema: Schema = new Schema({
@@ -34,8 +35,8 @@ const postSchema: Schema = new Schema({
     }],
 
 },  { timestamps: { createdAt: "createdAt", updatedAt:"updatedAt" } });
-// console.log(typeof())
-// userSchema.pre('save', preSave);
+
+postSchema.pre('save', preSave);
 postSchema.methods.getAverageRating = ()=>{};
 
 export default model<Post>("Post", postSchema)
