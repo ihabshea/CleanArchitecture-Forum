@@ -1,7 +1,6 @@
 import express, {Router}  from 'express'; 
 // import { listMyPosts } from '../../controllers';
-import { listAllPosts } from '../../controllers';
-import { createPost } from '../../controllers/posts/createPost';
+import { listAllPosts, createPost } from '../../controllers';
 import authenticateJWT from '../../middleware/authenticate';
 const router: Router = Router()
 

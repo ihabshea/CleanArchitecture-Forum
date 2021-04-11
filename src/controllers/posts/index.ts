@@ -1,3 +1,3 @@
 import {listMyPosts, listAllPosts} from './listPosts';
-
-export {listMyPosts, listAllPosts};
+import {createPost} from './createPost';
+export {listMyPosts, createPost, listAllPosts};
