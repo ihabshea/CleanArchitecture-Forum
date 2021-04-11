@@ -1,2 +1,3 @@
 import {signJWT, invalidateJWT} from  './jwtRedis';
-export {signJWT, invalidateJWT};
+import createSession from './createSession'
+export {signJWT, invalidateJWT, createSession};

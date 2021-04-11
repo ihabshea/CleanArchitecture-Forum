@@ -5,7 +5,6 @@ interface Token extends Document{
     _id: ObjectId;
     user_id: ObjectId;
     token: string;
-    device: Device;
     createdAt: Date;
     revokedAt: Date;
     revokeReference: TokenRevocation

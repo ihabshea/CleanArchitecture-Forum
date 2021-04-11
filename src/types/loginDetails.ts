@@ -8,4 +8,5 @@ export default interface LoginDetails extends Document{
     device: Device;
     token: Token;
     createdAt: Date;
+    terminated: boolean;
 }

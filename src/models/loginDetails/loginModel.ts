@@ -1,10 +1,6 @@
 import {model, Schema} from 'mongoose';
 import {LoginDetails} from '../../types';
 const loginSchema: Schema = new Schema({
-    entity:{
-        type: String,
-        required: true
-    },
     user:{
         type: Schema.Types.ObjectId, 
         ref:"User",
@@ -15,10 +11,12 @@ const loginSchema: Schema = new Schema({
     },
     token:{
         type: Schema.Types.ObjectId, 
-        ref:"Token",
+        ref: "Token",
     },
-
-
+    terminated:{
+        type: Boolean,
+        default:false
+    }
 },  { timestamps: { createdAt: "createdAt", updatedAt:"updatedAt" } });
 //pre-hooks
 

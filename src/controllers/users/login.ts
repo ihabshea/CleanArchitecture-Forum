@@ -3,14 +3,16 @@ import {userModel} from '../../models';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
-import { signJWT } from "./authorization";
+import { createSession, signJWT } from "./authorization";
+import { preFlightChecks } from "./utils";
 dotenv.config();
 
 const login = async(req:any, res:any): Promise<void> => {
     // console.log("Here")
     try{
         const body = req.body as UserLoginInput;
-        let {email, password} = body;
+        await preFlightChecks(body);
+        let {email, password, device_name, device_type} = body;
         let findUser = await userModel.findOne({email});
         if(findUser){
             const passwordMatch = await findUser.comparePasswords(findUser.password, bcrypt, password);
@@ -26,8 +28,13 @@ const login = async(req:any, res:any): Promise<void> => {
                     name: findUser.name,
                     expiresIn: '1d'
                 }
+                let loggedInSuccessfully = await createSession(findUser._id, token, device_name, device_type);
+                if(loggedInSuccessfully){
                 res.status(200)
                 .json({user: user});
+                }else{
+                    res.status(500).json({error:"Internal server error. Report issue to the team through Github."})
+                }
             }else{
                 res.status(400)
                 .json({error: "Invalid password or email."});
@@ -39,8 +46,6 @@ const login = async(req:any, res:any): Promise<void> => {
       
     }catch(error){
         res.status(400).json({error:error.message});
-        console.error(JSON.stringify(error)) 
-
     }
 }
 export default login;
