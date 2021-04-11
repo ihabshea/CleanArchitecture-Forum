@@ -9,7 +9,7 @@ dotenv.config();
 const logout = async (req: any, res: any): Promise<void> => {
     if (req?.user) {
         try{
-        let {jti} = req.user.jti;
+        let {jti} = req.user;
         let findToken: Token | null = await tokenModel.findOne({jti});
         let findLogin: LoginDetails | null = await loginModel.findOne({token_id: findToken?._id});
         let findDevice: Device | null = await deviceModel.findById(findLogin?.device);

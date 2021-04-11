@@ -18,7 +18,7 @@ const tokenSchema: Schema = new Schema({
         type: Schema.Types.ObjectId,
         ref:"User",
     },
-    revoked_at:{
+    revokedAt:{
         type: Date
     },
     revokeReference:{
