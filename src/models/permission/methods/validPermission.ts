@@ -1,7 +1,7 @@
 import { PermissionType } from "../../../types/enums";
 
 function isValidPermission(permission:string): boolean{
-    let isValid = permission in PermissionType;
+    let isValid = Object.values(PermissionType).includes(permission as PermissionType);
     return isValid;
 }
 export default isValidPermission;

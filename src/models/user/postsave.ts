@@ -8,7 +8,7 @@ import { Schema } from 'mongoose';
 
 import { isValidEmail, isValidName, isValidPassword } from './utils';
 import { permissionModel } from '../permission';
-import { grantPermissions } from './methods';
+import { changeNoviceStatus, grantPermissions } from './methods';
 dotenv.config();
 
 async function postSave  (this: User){

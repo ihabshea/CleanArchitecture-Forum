@@ -4,13 +4,12 @@ import isValidEntity from "./methods/validEntity";
 import isValidPermission from "./methods/validPermission";
 
 async function preSave(this: Permission, next: () => void){
+    console.log(this.permissionLevel);
     let validPermission = isValidPermission(this.permissionLevel);
     let validEntity = isValidEntity(this.entity);
     let canCreate = false;
     let createdBefore = false;
-    if(!canCreate){
-        throw Error("Illegal operation: can not create permission due to insufficient permission.");
-    }
+
     if(!validPermission){
         throw Error("Illegal operation: not a valid permission level")
     }
@@ -21,6 +20,9 @@ async function preSave(this: Permission, next: () => void){
         canCreate = await verifyAdmin(this.assigned_by);
     }else if(!this.assigned_by){
         canCreate = await verifyNewUser(this.user_id);
+    }
+    if(!canCreate){
+        throw Error("Illegal operation: can not create permission due to insufficient permission.");
     }
     createdBefore = await checkIfExists(this);
     if(createdBefore){

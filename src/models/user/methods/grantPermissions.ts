@@ -4,6 +4,7 @@ import { EntityType, PermissionType } from "../../../types/enums";
 import { permissionModel } from "../..";
 
 async function grantPermissions (user: User): Promise<void> {
+    
     $enum(EntityType).map(async(entity: EntityType) => {
         //needs better structure
         if(entity !== "permission" && entity !== "user"){
