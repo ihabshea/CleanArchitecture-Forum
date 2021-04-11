@@ -10,15 +10,18 @@ const jwtr = new JWTR(redisClient);
 const checkIfRevoked = async (token: string): Promise<boolean> => {
     let { jti }: JWTType = await verifyJWT(token);
     let findDestroyedJTI: Token | null = await tokenModel.findOne({ jti });
-    let findSession: LoginDetails | null = await loginModel.findOne({ token_id: findDestroyedJTI, terminated: true });
+    console.log(findDestroyedJTI);
+    let findSession: LoginDetails | null = await loginModel.findOne({ token: findDestroyedJTI?._id, terminated: true });
+    console.log(findSession);
     if (findSession) {
 
         jwtr.destroy(jti);
         if (findDestroyedJTI) {
             findDestroyedJTI.revokedAt = new Date();
             await findDestroyedJTI.save();
+            return true;
+            
         }
-        throw Error("Invalid session.");
     }
     return false;
 }
