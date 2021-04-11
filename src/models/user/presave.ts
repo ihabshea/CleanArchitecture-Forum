@@ -25,9 +25,9 @@ async function preSave  (this: User, next: ()=>void){
     if(emailExists){
         throw Error("Email already exists");
     }
-    
-    user.password = await createPassword(user.password, bcrypt, saltRounds);
-
+    if(this.isModified("password")){
+        user.password = await createPassword(user.password, bcrypt, saltRounds);
+    }
     next();
 }
 export default preSave;

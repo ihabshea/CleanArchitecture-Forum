@@ -11,6 +11,14 @@ const postSchema: Schema = new Schema({
         type: String,
         required: true
     },
+    hash:{
+        type: String,
+    },
+    device:{
+        type: Schema.Types.ObjectId,
+        ref:"Device",
+        required: true
+    },
     user:{
         type: Schema.Types.ObjectId,
         ref:"User",

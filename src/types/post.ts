@@ -1,14 +1,14 @@
 import {Document} from 'mongoose';
 import { User,Comment, Rating } from '.'; 
+import Device from './Device';
 export default interface Post extends Document{
     id: string;
     title: string;
     content: string;
-    comments: Comment[];
     hash: string;
     user: User;
     createdAt: Date;
     updatedAt: Date;
-    ratings: Rating[];
+    device: Device;
     getAverageRating: () => number;
 }   

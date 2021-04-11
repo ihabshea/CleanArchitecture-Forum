@@ -8,6 +8,5 @@ interface TokenRevocation extends Document{
     device: Device;
     createdAt: Date;
     revoke_reason: RevocationReason;
-
 }
 export default TokenRevocation;
