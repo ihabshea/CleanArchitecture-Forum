@@ -1,15 +1,18 @@
 import dotenv from 'dotenv';
-import { User } from '../../../types';
+import { JWTType, User } from '../../../types';
 import redis from 'redis';
 import * as jwtRedis from 'jwt-redis';
 const JWTR = jwtRedis.default;
 const redisClient = redis.createClient();
 const jwtr = new JWTR(redisClient);
 dotenv.config();
+const jwtSecret:any = process.env.JWT_SECRET;
 const signJWT = async(userObject: Partial<User>): Promise<string> => {
-    const jwtSecret:any = process.env.JWT_SECRET;
     let token = await jwtr.sign(userObject, jwtSecret, {expiresIn:"1d"});
     return token;
+}
+const verifyJWT = async(token: string): Promise<JWTType> => {
+    return await jwtr.verify(token, jwtSecret);
 }
 const invalidateJWT = async(token: string): Promise<boolean> => {
     try{
@@ -22,4 +25,4 @@ const invalidateJWT = async(token: string): Promise<boolean> => {
         throw Error(err);
     }
 }
-export {signJWT, invalidateJWT};
+export {signJWT, invalidateJWT, verifyJWT};

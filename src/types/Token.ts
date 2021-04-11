@@ -1,9 +1,9 @@
 import {Document, ObjectId} from 'mongoose';
-import { User, TokenRevocation } from '.';
-import Device from './Device';
+import { TokenRevocation } from '.';
 interface Token extends Document{
     _id: ObjectId;
     user_id: ObjectId;
+    jti: string;
     token: string;
     createdAt: Date;
     revokedAt: Date;

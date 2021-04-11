@@ -1,3 +1,4 @@
 import preFlightChecks from './preFlightChecks';
+import preFlightChecksForDevices from './preFlightChecksForDevices';
 
-export {preFlightChecks};
+export {preFlightChecks, preFlightChecksForDevices};

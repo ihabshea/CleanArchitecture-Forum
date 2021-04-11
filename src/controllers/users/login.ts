@@ -1,10 +1,11 @@
-import { UserLoginInput, UserJWT, User } from "../../types";
+import { UserLoginInput, UserJWT, User, Device } from "../../types";
 import {userModel} from '../../models';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { createSession, signJWT } from "./authorization";
-import { preFlightChecks } from "./utils";
+import { preFlightChecks, preFlightChecksForDevices } from "./utils";
+import { DeviceType } from "../../types/enums";
 dotenv.config();
 
 const login = async(req:any, res:any): Promise<void> => {
@@ -12,8 +13,9 @@ const login = async(req:any, res:any): Promise<void> => {
     try{
         const body = req.body as UserLoginInput;
         await preFlightChecks(body);
+
         let {email, password, device_name, device_type} = body;
-        let findUser = await userModel.findOne({email});
+        let findUser: User | null = await userModel.findOne({email});
         if(findUser){
             const passwordMatch = await findUser.comparePasswords(findUser.password, bcrypt, password);
             if(passwordMatch){
@@ -28,6 +30,7 @@ const login = async(req:any, res:any): Promise<void> => {
                     name: findUser.name,
                     expiresIn: '1d'
                 }
+        
                 let loggedInSuccessfully = await createSession(findUser._id, token, device_name, device_type);
                 if(loggedInSuccessfully){
                 res.status(200)

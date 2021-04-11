@@ -1,3 +1,3 @@
-import {createUser, login, logout} from './users';
+import {createUser, login, logout, logoutFromDevice} from './users';
 
-export  {createUser, login, logout};
+export  {createUser, login, logout, logoutFromDevice};

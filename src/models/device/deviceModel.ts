@@ -14,11 +14,22 @@ const deviceSchema: Schema = new Schema({
         type: String,
         required: true
     },
+    loggedOut:{
+        type: Boolean,
+        default: false
+    },
+    kickedOut:{
+        type: Boolean,
+        default: false
+    },
+    lastActivity:{
+        type: Date
+    },
     device_token:{
         type: String, 
         required: false
     },
-    token:{
+    token_id:{
         type: Schema.Types.ObjectId,
         ref:"Token",
 

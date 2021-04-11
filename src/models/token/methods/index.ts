@@ -1,2 +1,4 @@
 import encryptToken from './encryptToken';
-export {encryptToken};
+import compareTokens from './compareTokens';
+
+export {encryptToken, compareTokens};

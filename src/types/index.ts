@@ -6,6 +6,7 @@ import LoginDetails from './loginDetails';
 import Device from './Device';
 
 import Token from './Token';
+import JWTType from './JWT';
 import Permission from './Permission';
 
 import TokenRevocation from './TokenRevocation';
@@ -18,6 +19,7 @@ export {
     Post,
     Comment,
     UserInput,
+    JWTType,
     Token,
     User,
     Rating,
