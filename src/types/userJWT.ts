@@ -1,5 +1,7 @@
+import { ObjectId } from "mongoose";
+
 interface UserJWT {
-    userId: string;
+    userId: ObjectId;
     token: string;
     name: string;
     expiresIn: string;

@@ -1,6 +1,4 @@
 import {Document} from 'mongoose';
-export default interface UserInput{
-    name: string;
-    password: string;
-    email: string;
-}
+import { User } from '.';
+type UserInput = Pick<User, "email" | "password" | "name">;
+export default UserInput;

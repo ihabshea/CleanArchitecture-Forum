@@ -2,7 +2,7 @@ import {createPassword} from './middleware';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { User } from '../../types';
-import { userSchema } from '../../models';
+import { userModel } from '../../models';
 
 import { Schema } from 'mongoose';
 import { isValidEmail, isValidName, isValidPassword } from './utils';
@@ -21,7 +21,7 @@ async function preSave  (this: User, next: ()=>void){
          throw Error("Invalid email address");
     }
  
-    const emailExists = await userSchema.findOne({email: user.email}).exec();
+    const emailExists = await userModel.findOne({email: user.email}).exec();
     if(emailExists){
         throw Error("Email already exists");
     }

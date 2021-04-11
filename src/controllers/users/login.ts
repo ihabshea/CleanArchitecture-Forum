@@ -1,5 +1,5 @@
 import { UserLoginInput, UserJWT, User } from "../../types";
-import {userSchema} from '../../models';
+import {userModel} from '../../models';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
@@ -11,7 +11,7 @@ const login = async(req:any, res:any): Promise<void> => {
     try{
         const body = req.body as UserLoginInput;
         let {email, password} = body;
-        let findUser = await userSchema.findOne({email});
+        let findUser = await userModel.findOne({email});
         if(findUser){
             const passwordMatch = await findUser.comparePasswords(findUser.password, bcrypt, password);
             if(passwordMatch){

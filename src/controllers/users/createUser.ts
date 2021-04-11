@@ -1,8 +1,10 @@
 import { User, UserInput } from "../../types";
-import {userSchema} from '../../models';
-const makeUser = async(input: UserInput): Promise<User> => {
+import {userModel} from '../../models';
+type partialUser = Omit<UserInput, "name">;
+
+const makeUser = async(input: UserInput): Promise<partialUser> => {
     try{
-    let newUser = await new userSchema(input).save();
+    let newUser: partialUser = await new userModel(input).save();
     return newUser;
     }catch(err){
         // res.status()
@@ -11,10 +13,10 @@ const makeUser = async(input: UserInput): Promise<User> => {
 }
 
 const createUser = async(req:any, res:any): Promise<void> => {
-    // console.log("Here")
     try{
-        const body = req.body as UserInput;
-        let userCreated: Exclude<User, "password"> = await makeUser(body);
+        const body: UserInput = req.body as UserInput;
+        await makeUser(body);
+        let userCreated:  Omit<UserInput, "password"> = body;
 
         res.status(200)
         .json({user: userCreated});

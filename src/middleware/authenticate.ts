@@ -1,6 +1,4 @@
 import dotenv from 'dotenv';
-// import jwt, { JsonWebTokenError, Secret } from 'jsonwebtoken';
-// import { UserJWT } from '../types';
 import redis from 'redis';
 import * as jwtRedis from 'jwt-redis';
 const JWTR = jwtRedis.default;
@@ -9,9 +7,8 @@ const jwtr = new JWTR(redisClient);
 dotenv.config();
 const authenticateJWT = async (req: any, res: any, next: () => void): Promise<void> => {
     const authHeader: string = req.headers?.authorization;
-
     const token: string = authHeader?.split(" ")[1];
-    const jwtSecret: any = process.env.JWT_SECRET;
+    const jwtSecret: string = process.env.JWT_SECRET || "";
     try {
         let user = await jwtr.verify(token, jwtSecret) || null;
         req.user = user;

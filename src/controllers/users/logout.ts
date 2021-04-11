@@ -1,5 +1,5 @@
 import { UserLoginInput, UserJWT, User } from "../../types";
-import { userSchema } from '../../models';
+// import { userModel } from '../../models';
 import dotenv from 'dotenv';
 import { invalidateJWT } from "./authorization";
 

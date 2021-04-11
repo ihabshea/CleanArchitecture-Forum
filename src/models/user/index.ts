@@ -1,2 +1,2 @@
-import userSchema from './userModel'
-export {userSchema};
+import userModel from './userModel'
+export {userModel};
