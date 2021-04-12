@@ -32,10 +32,6 @@ const postSchema: Schema = new Schema({
         type: Schema.Types.ObjectId,
         ref:"Rating",
     }],
-    comments:[{
-        type: Schema.Types.ObjectId,
-        ref:"Comment",
-    }],
 
 },  { timestamps: { createdAt: "createdAt", updatedAt:"updatedAt" } });
 
