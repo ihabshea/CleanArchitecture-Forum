@@ -1,6 +1,7 @@
 import {createUser, login, logout, logoutFromDevice} from './users';
-import {listMyPosts,createPost, listAllPosts} from './posts'
+import {listMyPosts,createPost, listPostsByDevice, listAllPosts} from './posts'
 export  {
     createUser, login, logout, logoutFromDevice,
-    listMyPosts, listAllPosts, createPost
+    listMyPosts, listAllPosts,listPostsByDevice,
+     createPost, 
 };

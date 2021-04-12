@@ -1,3 +1,5 @@
-import {listMyPosts, listAllPosts} from './listPosts';
+import {listMyPosts, listPostsByDevice, listAllPosts} from './listPosts';
 import {createPost} from './createPost';
-export {listMyPosts, createPost, listAllPosts};
+export {listMyPosts, listPostsByDevice, listAllPosts,
+createPost
+};
