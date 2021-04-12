@@ -1,7 +1,5 @@
 import { ObjectId } from "mongoose";
-import { permissionModel, userModel } from "../..";
-import { User } from "../../../types"
-import { EntityType, PermissionType } from "../../../types/enums";
+import { userModel } from "../..";
 
 async function verifyNewUser(user_id: ObjectId): Promise<boolean> {
     let newUser = Boolean(await userModel.findOne({_id: user_id, new: true}));

@@ -1,6 +1,5 @@
 import { permissionModel } from "../..";
 import { Permission, User } from "../../../types"
-import { EntityType, PermissionType } from "../../../types/enums";
 
 async function checkIfExists(permission: Permission): Promise<boolean> {
     let permissionExists = Boolean(await permissionModel.findOne({
