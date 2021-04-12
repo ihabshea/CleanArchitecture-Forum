@@ -20,6 +20,9 @@ const postSchema: Schema = new Schema({
         ref:"Device",
         required: true
     },
+    deletedAt:{
+        type: Date,
+    },
     user:{
         type: Schema.Types.ObjectId,
         ref:"User",

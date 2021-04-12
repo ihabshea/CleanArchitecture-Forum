@@ -5,7 +5,15 @@ const listMyPosts = async(req: any, res: any): Promise<void> =>{
     let {userId} = req.user;
     let {page=0, per=20} = req.body as PaginationParams;
     let skip = per/page | 0;
-    let posts = await postModel.find({user_id: userId}).skip(skip).limit(per);
+    let posts = await postModel.find({user_id: userId, deletedAt:{$exists: false}}).skip(skip).limit(per);
+    let allPosts = await postModel.countDocuments({user_id: userId});
+    res.status(200).json({total: allPosts, thisPage: posts.length, page, per, posts});
+}
+const listMyDeletedPosts = async(req: any, res: any): Promise<void> =>{
+    let {userId} = req.user;
+    let {page=0, per=20} = req.body as PaginationParams;
+    let skip = per/page | 0;
+    let posts = await postModel.find({user_id: userId, deletedAt:{$exists: true}}).skip(skip).limit(per);
     let allPosts = await postModel.countDocuments({user_id: userId});
     res.status(200).json({total: allPosts, thisPage: posts.length, page, per, posts});
 }
@@ -21,12 +29,13 @@ const listPostsByDevice = async(req: any, res: any): Promise<void> => {
         res.status(400).json({error: err.message});
     }
 }   
+
 const listAllPosts = async(req: any, res: any): Promise<void> =>{
     let {page=0, per=20} = req.body as PaginationParams;
     let skip = per/page | 0;
-    let posts = await postModel.find().skip(skip).limit(per);
+    let posts = await postModel.find({deletedAt:{$exists: false}}).skip(skip).limit(per);
     let allPosts = await postModel.countDocuments();
 
     res.status(200).json({total: allPosts, thisPage: posts.length, page, per, posts});
 }
-export {listMyPosts,listPostsByDevice,  listAllPosts};
+export {listMyPosts,listPostsByDevice, listMyDeletedPosts, listAllPosts};

@@ -8,6 +8,7 @@ export default interface Post extends Document{
     hash: string;
     user: User | ObjectId;
     createdAt: Date;
+    deletedAt: Date;
     updatedAt: Date;
     device: Device;
     getAverageRating: () => number;
